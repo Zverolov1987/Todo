@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Template</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" 
+    crossorigin="anonymous">
+
+ <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+  </head>
+  <body>
+
+   
+   
+<div id="root"></div>
+
+
+
+
+<script type="text/babel">
+
+
+
+    class TodoApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { items: [], text: '' };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  render() {
+    return (
+      <div className='text-center'>
+	<Audio />
+        <h3 className='text-light bg-dark'>TODO</h3>
+        <TodoList items={this.state.items} />
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="new-todo text-primary">
+           What needs to be done?
+          </label>
+          <input
+	    className="form-control" 
+	    placeholder="TASK LIST" 
+            id="new-todo"
+            onChange={this.handleChange}
+            value={this.state.text}
+          /> 
+	  <br />
+          <button className='btn btn-primary' onClick={aud_play}>
+            Add №{this.state.items.length + 1}
+          </button>
+        </form>
+      </div>
+    );
+  }
+
+  handleChange(e) {
+    this.setState({ text: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (!this.state.text.length) {
+      return;
+    }
+    const newItem = {
+      text: this.state.text,
+      id: Date.now()
+    };
+
+    this.setState(state => ({
+      items: state.items.concat(newItem),
+      text: ''
+    }));
+  }
+}
+
+
+class TodoList extends React.Component {
+  render() {
+    return (
+      <ol>
+        {this.props.items.map(item => (
+<li key={item.id} className='p-3 mb-2 text-success'>{item.text}<hr /></li>
+        ))}
+      </ol>
+    );
+  }
+}
+
+class Audio extends React.Component {
+  render() {
+    return (
+      <div>
+        <audio src="data:audio/mp3;base64,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" id="click"></audio>
+      </div>
+    );
+  }
+}
+
+function aud_play() {
+      const clickSound = document.getElementById('click');
+      clickSound.volume = 0.9;
+      clickSound.play();
+                
+            }
+
+
+ReactDOM.render(<TodoApp />, document.getElementById('root'));
+
+
+
+
+
+</script>
+
+
+
+  </body>
+</html>
